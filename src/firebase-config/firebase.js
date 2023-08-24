@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 
+import {getAuth,GoogleAuthProvider} from 'firebase/auth'
+
 const firebaseConfig = {
     apiKey: "AIzaSyAFOu-JAEkTRmng5aNbX9x5LLzzmxzBCfE",
     authDomain: "chat-app-d4733.firebaseapp.com",
@@ -12,3 +14,7 @@ const firebaseConfig = {
 
   // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+export const auth = getAuth(app);
+
+export const provider = new GoogleAuthProvider();
