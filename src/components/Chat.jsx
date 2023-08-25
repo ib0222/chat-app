@@ -18,7 +18,7 @@ function Chat({ room }) {
   const messagesRef = collection(db, "messages");
 
   useEffect(() => {
-    const queryMessages = query(messagesRef, where("room", "==", room));
+    const queryMessages = query(messagesRef, where("room", "==", room),orderBy("createdAt"));
     onSnapshot(queryMessages, (snapshot) => {
       let messages = [];
 
