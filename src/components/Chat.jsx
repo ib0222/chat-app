@@ -3,11 +3,11 @@ import "../styles/Chat.css";
 import {
   addDoc,
   collection,
-  serverTimestamp,
   onSnapshot,
+  orderBy,
   query,
+  serverTimestamp,
   where,
-  orderBy
 } from "firebase/firestore";
 import { auth, db } from "../firebase-config/firebase";
 
@@ -17,10 +17,9 @@ function Chat({ room }) {
   const [messages, setMessages] = useState([]);
 
   const messagesRef = collection(db, "messages");
-
   useEffect(() => {
     const queryMessages = query(messagesRef, where("room", "==", room),orderBy("createdAt"));
-    onSnapshot(queryMessages, (snapshot) => {
+    const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
       let messages = [];
 
       snapshot.forEach((doc) => {
@@ -28,8 +27,8 @@ function Chat({ room }) {
       });
       setMessages(messages);
     });
-    return () => unsuscribe();
-  }, []);
+    return () => unsubscribe();
+  }, [room]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
