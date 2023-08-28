@@ -14,6 +14,7 @@ import {
 import { auth, db } from "../firebase-config/firebase";
 
 function Chat({ room }) {
+
   const [newMessage, setNewMessage] = useState("");
 
   const [messages, setMessages] = useState([]);
@@ -49,7 +50,8 @@ function Chat({ room }) {
       text: newMessage,
       createdAt: serverTimestamp(),
       user: auth.currentUser.displayName,
-      room,
+      photoUrl: auth.currentUser.photoURL,
+      room
     });
     setNewMessage("");
   };
@@ -64,8 +66,9 @@ function Chat({ room }) {
           {messages.map((message) => (
             <div className="message" key={message.id}>
               <div style={{display:'flex'}}>
+                <img src={message.photoUrl} className="profile-photo"/>
                 <p className="user">{message.user}</p>
-                <p>{message.text}</p>
+                <p style={{display:'flex', flexWrap:'wrap'}}>{message.text}</p>
               </div>
               <div style={{display:'flex',justifyContent:'center'}}>
               <button onClick={() => deleteMessage(message.id)}>❌</button>
