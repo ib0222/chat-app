@@ -9,10 +9,11 @@ body {
   box-sizing: border-box;
 }
 .chat-app {
-  width: 100%;
+  max-width: 100%;
   margin-top: 30px;
   background-color: rgb(221, 221, 221);
   padding: 20px;
+  border-radius: 20px;
 }
 .profile-photo {
   width: 50px;
@@ -27,17 +28,19 @@ input {
   width: 100%;
   font-size: 20px;
   padding: 15px 10px;
+  border-radius: 10px;
+  border: none;
+  margin-right: 20px;
 }
 .message {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  
 }
 .message p {
   max-width: 400px;
   display: flex;
-  background-color: rgb(133, 133, 255);
   margin: 10px;
-  padding: 20px 10px;
   word-break: break-all;
 }
 .messages {
@@ -49,4 +52,27 @@ input {
   background: none;
   outline: none;
   border: none;
+}
+.new-message-form{
+  margin-top: 20px;
+}
+.header{
+  text-align: center;
+  font-size: 15px;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  color: rgb(0, 0, 82);
+}
+.only-message{
+  display: flex;
+  align-items: center;
+  background-color: rgb(133, 133, 255);
+  margin: 10px ;
+  padding: 10px;
+  border-radius: 10px;
+}
+.delete-btn{
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgb(216, 0, 0);
 }

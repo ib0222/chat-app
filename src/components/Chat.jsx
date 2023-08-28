@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import "../styles/Chat.css";
-import SendIcon from '@mui/icons-material/Send';
+import SendIcon from "@mui/icons-material/Send";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   doc,
   addDoc,
@@ -69,9 +70,17 @@ function Chat({ room }) {
       </div>
       <div className="messages" ref={chatContainerRef}>
         {messages.map((message) => (
-          <div key={message.id} className="message">  
+          <div key={message.id} className="message">
             <img src={message.photoUrl} className="profile-photo" />
-            <p className="message-box">{message.text}</p>
+            <div className="only-message">
+              <p className="message-box">{message.text}</p>
+              <button
+                className="delete-btn"
+                onClick={() => deleteMessage(message.id)}
+              >
+                <DeleteIcon />
+              </button>
+            </div>
           </div>
         ))}
       </div>
@@ -84,7 +93,7 @@ function Chat({ room }) {
           value={newMessage}
         />
         <button type="submit" className="send-button">
-          <SendIcon fontSize="large"/>
+          <SendIcon fontSize="large" />
         </button>
       </form>
     </div>
