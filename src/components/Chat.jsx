@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/Chat.css";
 import {
+  doc,
   addDoc,
   collection,
   onSnapshot,
@@ -8,6 +9,7 @@ import {
   query,
   serverTimestamp,
   where,
+  deleteDoc,
 } from "firebase/firestore";
 import { auth, db } from "../firebase-config/firebase";
 
@@ -18,7 +20,11 @@ function Chat({ room }) {
 
   const messagesRef = collection(db, "messages");
   useEffect(() => {
-    const queryMessages = query(messagesRef, where("room", "==", room),orderBy("createdAt"));
+    const queryMessages = query(
+      messagesRef,
+      where("room", "==", room),
+      orderBy("createdAt")
+    );
     const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
       let messages = [];
 
@@ -29,6 +35,11 @@ function Chat({ room }) {
     });
     return () => unsubscribe();
   }, [room]);
+
+  async function deleteMessage(messageId) {
+    const messageDocRef = doc(messagesRef, messageId);
+    await deleteDoc(messageDocRef);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,8 +63,13 @@ function Chat({ room }) {
         <div>
           {messages.map((message) => (
             <div className="message" key={message.id}>
-              <span className="user">{message.user}</span>
-              {message.text}
+              <div style={{display:'flex'}}>
+                <p className="user">{message.user}</p>
+                <p>{message.text}</p>
+              </div>
+              <div style={{display:'flex',justifyContent:'center'}}>
+              <button onClick={() => deleteMessage(message.id)}>❌</button>
+              </div>
             </div>
           ))}
         </div>
