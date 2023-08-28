@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "../styles/Chat.css";
+import SendIcon from '@mui/icons-material/Send';
 import {
   doc,
   addDoc,
@@ -14,12 +15,17 @@ import {
 import { auth, db } from "../firebase-config/firebase";
 
 function Chat({ room }) {
-
   const [newMessage, setNewMessage] = useState("");
 
   const [messages, setMessages] = useState([]);
 
   const messagesRef = collection(db, "messages");
+
+  const chatContainerRef = useRef(null);
+  useEffect(() => {
+    // Scroll to the bottom of the chat when messages change
+    chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+  }, [messages]);
   useEffect(() => {
     const queryMessages = query(
       messagesRef,
@@ -51,7 +57,7 @@ function Chat({ room }) {
       createdAt: serverTimestamp(),
       user: auth.currentUser.displayName,
       photoUrl: auth.currentUser.photoURL,
-      room
+      room,
     });
     setNewMessage("");
   };
@@ -61,21 +67,13 @@ function Chat({ room }) {
       <div className="header">
         <h1>Welcome to :{room.toUpperCase()}</h1>
       </div>
-      <div className="messages">
-        <div>
-          {messages.map((message) => (
-            <div className="message" key={message.id}>
-              <div style={{display:'flex'}}>
-                <img src={message.photoUrl} className="profile-photo"/>
-                <p className="user">{message.user}</p>
-                <p style={{display:'flex', flexWrap:'wrap'}}>{message.text}</p>
-              </div>
-              <div style={{display:'flex',justifyContent:'center'}}>
-              <button onClick={() => deleteMessage(message.id)}>❌</button>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="messages" ref={chatContainerRef}>
+        {messages.map((message) => (
+          <div key={message.id} className="message">  
+            <img src={message.photoUrl} className="profile-photo" />
+            <p className="message-box">{message.text}</p>
+          </div>
+        ))}
       </div>
 
       <form className="new-message-form" onSubmit={handleSubmit}>
@@ -86,7 +84,7 @@ function Chat({ room }) {
           value={newMessage}
         />
         <button type="submit" className="send-button">
-          Send
+          <SendIcon fontSize="large"/>
         </button>
       </form>
     </div>
