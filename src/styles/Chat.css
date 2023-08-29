@@ -19,6 +19,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: all 0.5s;
 }
 .profile-photo {
   width: 30px;
@@ -86,4 +87,11 @@ input {
   border: none;
   cursor: pointer;
   color: rgb(216, 0, 0);
+}
+
+@media (max-width: 500px){
+  .chat-app{
+    width: inherit;
+    min-height: inherit;
+  }
 }
