@@ -9,15 +9,20 @@ body {
   box-sizing: border-box;
 }
 .chat-app {
+  min-height: 700px;
+  width: 500px;
   max-width: 100%;
   margin-top: 30px;
   background-color: rgb(221, 221, 221);
   padding: 20px;
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .profile-photo {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border-radius: 100%;
 }
 
@@ -35,7 +40,7 @@ input {
 .message {
   display: flex;
   align-items: flex-start;
-  
+  transition: all 0.3s  ;
 }
 .message p {
   max-width: 400px;
@@ -49,12 +54,18 @@ input {
 }
 .send-button {
   color: blue;
-  background: none;
+  border-radius: 50px;
   outline: none;
   border: none;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
 }
 .new-message-form{
   margin-top: 20px;
+  background-color: white;
+  border-radius: 10px;
 }
 .header{
   text-align: center;

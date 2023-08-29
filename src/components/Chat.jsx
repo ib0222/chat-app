@@ -93,7 +93,7 @@ function Chat({ room }) {
           value={newMessage}
         />
         <button type="submit" className="send-button">
-          <SendIcon fontSize="large" />
+          <SendIcon sx={{fontSize:30}} />
         </button>
       </form>
     </div>
