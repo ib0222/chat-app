@@ -41,7 +41,7 @@ input {
 .message {
   display: flex;
   align-items: flex-start;
-  transition: all 0.3s  ;
+  transition: all 0.3s;
 }
 .message p {
   max-width: 400px;
@@ -63,35 +63,34 @@ input {
   padding: 10px;
   cursor: pointer;
 }
-.new-message-form{
+.new-message-form {
   margin-top: 20px;
   background-color: white;
   border-radius: 10px;
 }
-.header{
+.header {
   text-align: center;
   font-size: 15px;
-  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   color: rgb(0, 0, 82);
 }
-.only-message{
+.only-message {
   display: flex;
   align-items: center;
   background-color: rgb(133, 133, 255);
-  margin: 10px ;
+  margin: 10px;
   padding: 10px;
   border-radius: 10px;
 }
-.delete-btn{
+.delete-btn {
   background: none;
   border: none;
   cursor: pointer;
   color: rgb(216, 0, 0);
 }
 
-@media (max-width: 500px){
-  .chat-app{
+@media (max-width: 500px) {
+  .chat-app {
     width: inherit;
-    min-height: inherit;
   }
 }
